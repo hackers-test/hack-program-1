@@ -2,7 +2,7 @@
 """
 A class for playing rock paper scissors
 """
-
+import os
 import numpy as np
 import pandas as pd
 
@@ -26,7 +26,7 @@ def makeRecord():
             throwList.append(throw1)
 
     throwDF = pd.DataFrame(throwList)
-    throwDF.to_csv('record.csv',index = False)
+    throwDF.to_csv('/tmp/record.csv',index = False)
 
 #take in a csv of a record of someone's throws and find the best throw to counter
 #that person
@@ -48,8 +48,8 @@ def playRPS(throw):
 
     #set up computer throw from a record of opponent's throws. pick throw to beat their
     #most commonly used throw
-
-    throwToBeat = learnFrom('record.csv')
+    makeRecord()
+    throwToBeat = learnFrom("/tmp/record.csv")
 
     if(throwToBeat == 'rock'):
         compThrow = 'paper'
@@ -91,7 +91,7 @@ def printWinner(win):
     elif(win == -1):
     	print("HAHA I WIN")
     else:
-    	print("It's a tie!")
+        print("It's a tie!")
 
 
 if __name__ == "__main__":

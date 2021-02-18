@@ -15,6 +15,9 @@ setup(
     description="A package for playing rock paper scissors",
     classifiers=["Programming Language :: Python :: 3"],
     entry_points={
-        "console_scripts": ["mymodule = mypackage.__main__:main"]
+        "console_scripts": [
+            "mymodule = mypackage.__main__:main",
+            "mymodule2 = mypackage.__main2__:main",            
+        ]
     },
 )

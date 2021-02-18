@@ -1,8 +1,11 @@
+#!/usr/bin/env python
+
 """
 Command line interface to mymodule
 """
+
 import argparse
-from mypackage.mymodule import playRPS
+from mypackage.module2 import play_rps
 
 
 def parse_command_line():
@@ -13,18 +16,23 @@ def parse_command_line():
 
     # add long args
     parser.add_argument(
-        "--throw",
-        type= str,
-        help="choose rock, paper or scissors",
+        "-t", "--trials",
+        type= int,
+        default=1,
+        help="number of replicate R/P/S games to play",
+        action="store")
+
+    # add long args
+    parser.add_argument(
+        "-p", "--probs",
+        nargs=3,
+        type= float,
+        default=(1/3, 1/3, 1/3),
+        help="the probability the computer chooses rock, paper, or scissors",
         action="store")
 
     # parse args
     args = parser.parse_args()
-
-    # check that user only entered one action arg
-    if args.throw not in ['rock', 'paper', 'scissors']:
-        raise SystemExit(
-            "throw must be 'rock', 'paper' or 'scissors'")
     return args
 
 
@@ -33,4 +41,4 @@ def main():
 
     # get arguments from command line as a dict-like object
     args = parse_command_line()
-    playRPS(args.throw)
+    play_rps(args.trials, args.probs)
